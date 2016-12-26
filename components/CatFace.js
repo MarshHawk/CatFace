@@ -1,14 +1,14 @@
 import React from 'react';
-import Header from './reusableComponents/Header';
-import Raccoon from './reusableComponents/Raccoon';
-import Cat from './reusableComponents/Cat';
-import { Router, Route, Link, IndexRoute, hashHistory, browserHistory } from 'react-router'
+import Raccoon from './pages/Raccoon';
+import CatSearch from './pages/CatSearch';
+import { Link } from 'react-router';
+
 import io from 'socket.io-client';
 
 class CatFace extends React.Component {
 
-  constructor(){
-    super(...arguments);
+  constructor(props){
+    super(props);
     this.state = {
       status:'disconnected',
       title: ''
@@ -39,14 +39,17 @@ class CatFace extends React.Component {
 
   render() {
     return (
-      <Router history={hashHistory}>
-      <div className="editorInterface">
-        <Header title={this.state.title} status={this.state.status} />
+      <div>
+        <header>
+          <h1> Cat Face: </h1>
+          <h3>The face of the Cat Suite</h3>
+          <nav>
+              <Link to='/CatSearch'>Search</Link>
+              <Link to='/Raccoon'>Raccoon</Link>
+          </nav>
+        </header>
+        {this.props.children}
       </div>
-      
-        <Route path='/' component={Cat} />
-        <Route path='/Raccoon' component={Raccoon} />
-      </Router>
 
     ) //return
   } //render
